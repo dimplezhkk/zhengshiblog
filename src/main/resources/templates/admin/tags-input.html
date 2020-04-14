@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="admin/_fragments :: head(~{::title})">
+    <title th:text="*{id}==null ? '新增博文标签' : '修改博文标签'">新增博文标签</title>
+</head>
+<body>
+    <!--导航-->
+    <nav th:replace="admin/_fragments :: menu(4)">
+    </nav>
+    <!--二级导航-->
+    <div class="ui attached inverted pointing menu">
+        <div class="ui container">
+            <div class="left menu">
+                <i class="add black circle icon"></i><div class="active teal item" th:text="*{id}==null ? '新增标签' : '修改标签'">新增标签</div>
+                <a th:href="@{/admin/tags}" class="item">标签列表</a>
+            </div>
+        </div>
+    </div>
+    <!--中间部分-->
+    <div class="m-container m-padded-tb-large">
+        <div class="ui container">
+            <form class="ui form" method="post" th:object="${tag}" th:action="*{id}==null ? @{/admin/tags} : @{/admin/tags/{id}(id=*{id})}">
+                <div class="required field">
+                    <div class="ui left labeled input">
+                        <label class="ui yellow basic label"><i class=" tag icon"></i>标签名称</label>
+                        <input type="text" th:value="*{name}" name="name" placeholder="请输入标签名称......">
+                        <input type="hidden" name="id" th:value="*{id}">
+                    </div>
+                </div>
+                <!--前端验证-->
+                <div class="ui error message"></div>
+                <!--后端验证-->
+                <!--/*/
+                <div class="ui negative message" th:if="${#fields.hasErrors('name')}">
+                    <i class="class close icon"></i>
+                    <div class="header">提示：</div>
+                    <p th:errors="*{name}">验证失败</p>
+                </div>
+                /*/-->
+                <div class="ui right aligned container">
+                    <button class="ui button" type="button" onclick="window.history.go(-1)">返回</button>
+                    <button class="ui green submit button" th:text="*{id}==null ? '新增' : '更新'">新增</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    </div>
+
+    <!--底部footer-->
+    <!--/*/<th:block th:replace="admin/_fragments :: script">/*/-->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>\
+    <script src="../../static/lib/editormd/editormd.js"></script>
+    <!--/*/</th:block>/*/-->
+<script>
+
+    $('.menu.toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+        return false;
+    });
+    $('.ui.dropdown').dropdown({
+        on : 'hover'
+    });
+    $('.ui.form').form({
+       fields : {
+           title : {
+               identifier : 'name',
+               rules : [{
+                   type : 'empty',
+                   prompt : '博文标签不能为空，请输入博文标签'
+               }]
+           },
+       },
+        inline : true,
+        on     : 'blur'
+    });
+    //消息提示关闭初始化
+    $('.message .close').
+    click(function () {
+        $(this).
+        closest('.message').
+        transition('fly');
+    });
+</script>
+</body>
+</html>

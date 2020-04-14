@@ -1,0 +1,12 @@
+#配置页面不缓存
+spring:
+  thymeleaf:
+    cache: false
+#选择环境
+  profiles:
+    active: pro
+  messages:
+    basename: i18n/messages
+
+
+comment.avatar: /images/avatar.jpeg
