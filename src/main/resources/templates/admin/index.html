@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="admin/_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>博客后台管理</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <link rel="stylesheet" href="../../static/css/me.css">
+</head>
+<body>
+    <!--导航-->
+    <nav th:replace="admin/_fragments :: menu(1)" class="ui  inverted attached segment m-padded-tb-mini m-shadow-small">
+        <div class="ui container">
+            <div class="ui inverted secondary stackable menu">
+                <h2 class="ui blue header item">鄭氏博客管理后台</h2>
+                <a href="#" class="active m-item item m-mobile-hide"><i class="ui red  home icon"></i>后台首页</a>
+                <a href="#" class=" m-item item m-mobile-hide"><i class="ui pink  book icon"></i>博客管理</a>
+                <a href="#" class=" m-item item m-mobile-hide"><i class="green sitemap icon"></i>分类管理</a>
+                <a href="#" class="m-item item m-mobile-hide"><i class="purple tags icon"></i>标签管理</a>
+                <div class="right menu m-item m-mobile-hide">
+                    <div class="ui dropdown item">
+                        <div class="text">
+                            <img src="https://picsum.photos/id/237/100/100" alt="" class="ui avatar image">
+                            鄭成功
+                        </div>
+                        <i class="dropdown icon"></i>
+                        <div class="menu">
+                            <a href="" class="item">个人信息</a>
+                            <a href="" class="item">修改密码</a>
+                            <a href="" class="item">注销</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="" class="ui menu toggle black icon button m-right-top m-mobile-show"> <i class="sidebar icon"></i></a>
+    </nav>
+    <!--二级导航-->
+    <div class="ui attached inverted pointing menu">
+        <div class="ui container">
+            <div class="left pink menu">
+                <div class="active teal item"><i class="red paw icon"></i>统计面板</div>
+            </div>
+        </div>
+    </div>
+    <!--中间部分-->
+    <div class="m-container m-padded-tb-large">
+        <div class="ui container">
+            <div class="ui success message large">
+                <h4><i class="smile pink big icon"></i>你好</h4>
+                <span style="color: red">[[${session.user.nickname}]]</span><span>，欢迎访问！</span>
+            </div>
+            <div class="ui one column grid">
+                <div class="column">
+                    <div class="ui raised segment">
+                        <a class="ui red ribbon label"><i class="teal bookmark icon"></i>博客文章</a>
+                        <p class="ui right teal button" th:text="${countBlog}">999</p>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="ui raised segment">
+                        <a class="ui pink ribbon label"><i class="green sitemap icon"></i>博文分类</a>
+                        <p class="ui right green ribbon button" th:text="${countType}">999</p>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="ui raised segment">
+                        <a class="ui yellow ribbon label"><i class="purple tags icon"></i>博文标签</a>
+                        <p class="ui right purple ribbon button" th:text="${countTag}">888</p>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="ui raised segment">
+                        <a class="ui purple ribbon label"><i class="black users icon"></i>系统用户</a>
+                        <p class="ui right black ribbon button" th:text="${countUser}">888</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+    <!--底部footer-->
+    <!--/*/<th:block th:replace="admin/_fragments :: script">/*/-->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+    <script src="../../static/lib/editormd/editormd.js"></script>
+    <!--/*/</th:block>/*/-->
+<script>
+    $('.menu.toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+        return false;
+    });
+    $('.ui.dropdown').dropdown({
+        on : 'hover'
+    });
+</script>
+</body>
+</html>

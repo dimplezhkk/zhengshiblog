@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--css资源片段引用-->
+    <head th:fragment="head(title)">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title th:replace="${title}">博文详情</title>
+        <link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+        <link rel="stylesheet" href="../static/css/typo.css" th:href="@{/css/typo.css}">
+        <link rel="stylesheet" href="../static/css/animate.css" th:href="@{/css/animate.css}">
+        <link rel="stylesheet" href="../static/lib/prism/prism.css" th:href="@{/lib/prism/prism.css}">
+        <link rel="stylesheet" href="../static/lib/tocbot/tocbot.css" th:href="@{/lib/tocbot/tocbot.css}">
+        <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}">
+    </head>
+<body>
+
+<!--前台导航引用片段-->
+<nav th:fragment="menu(n)" class="ui  attached segment m-padded-tb-mini m-shadow-small">
+    <div style="float: left;padding-top: 5px"><img th:src="@{/images/logo.png}" style="width: 100px;height: 45px"></div>
+    <div class="ui container">
+        <div class="ui  secondary stackable menu">
+            <h2 class="ui blue header item">鄭氏博客</h2>
+            <a href="#" th:href="@{/}" class="m-item item m-mobile-hide" th:classappend="${n==6} ? 'active'"><i class="ui red  home icon"></i>我的主页</a>
+            <a href="#" th:href="@{/index}" class="m-item item m-mobile-hide" th:classappend="${n==1} ? 'active'"><i class="ui yellow  book icon"></i>博文主页</a>
+            <a href="#" th:href="@{/types/-1}" class="m-item item m-mobile-hide" th:classappend="${n==2} ? 'active'"><i class="green sitemap icon"></i>博文分类</a>
+            <a href="#" th:href="@{/tags/-1}" class="m-item item m-mobile-hide" th:classappend="${n==3} ? 'active'"><i class="purple tags icon"></i>博文标签</a>
+            <a href="#" th:href="@{/archives}" class="m-item item m-mobile-hide" th:classappend="${n==4} ? 'active'"><i class="teal clone icon"></i>博文归档</a>
+            <a href="#" th:href="@{/about}" class="m-item item m-mobile-hide" th:classappend="${n==5} ? 'active'"><i class="brown info circle icon"></i>与吾有关</a>
+            <div class="m-item right item m-mobile-hide">
+                <form name="search" action="#" method="post" th:action="@{/search}" target="_blank">
+                <div class="ui icon transparent input">
+                    <input type="text" name="query" placeholder="请输入想要搜索的......" th:value="${query}">
+                    <i onclick="document.forms['search'].submit()" class="teal searchengin link icon"></i>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <a href="" class="ui menu toggle black icon button m-right-top m-mobile-show"> <i class="sidebar icon"></i></a>
+</nav>
+
+
+<!--底部footer引用片段-->
+<footer th:fragment="footer" class="ui vertical segment m-padded-tb-big">
+    <div class="ui center aligned container">
+        <div class="ui divided stackable grid">
+            <div class="two wide column">
+                <h4 class="ui inverted header m-text-thin green m-text-spaced"><i class="weixin icon"></i></h4>
+                <div class="ui inverted link list">
+                    <div class="item">
+                        <img th:src="@{/images/wx.jpg}" src="../static/images/wx.jpg" alt="" class="ui rounded image" style="width: 90px">
+                    </div>
+                </div>
+            </div>
+            <div class="two wide column">
+                <h4 class="ui header orange m-text-thin m-text-spaced"><i class="weibo icon"></i></h4>
+                <div class="ui inverted link list">
+                    <div class="item">
+                        <img th:src="@{/images/wb.jpg}" src="../static/images/wb.jpg" alt="" class="ui rounded image" style="width: 90px">
+                    </div>
+                </div>
+            </div>
+            <div class="four wide column">
+                <h4 class="ui header m-text-thin m-text-spaced">最新博文</h4>
+                <div id="newblog-container">
+                <div class="ui link list" th:fragment="newblogList">
+                    <a href="" class="item" target="_blank" th:href="@{/blog/{id}(id=${blog.id})}" th:each="blog : ${newblogs}" th:text="${blog.title}">开发工具</a>
+                </div>
+                </div>
+            </div>
+            <div class="four wide column">
+                <h4 class="ui header m-text-thin m-text-spaced">与吾联系</h4>
+                <div class="ui link list">
+                    <a href="javascript:void (0);" class="item"><i class="mail teal icon"></i>Email：[[#{index.email}]]</a>
+                    <a href="javascript:void (0);" class="item"><i class="qq blue icon"></i>QQ：1775825464</a>
+                    <p><i class="icon orange time"></i>Time：<span id="clock"></span></p>
+                    <p><i class="icon green space shuttle"></i>系统已运行：<span id="times"></span></p>
+                </div>
+            </div>
+            <div class="four wide column">
+                <h4 class="ui header">吾之自白</h4>
+                <p class="m-text-thin m-text-spaced m-opacity-mini">如果你有能力去解决问题,而不行动,那一但有坏事发生就是你的责任!</p>
+                <p class="m-text-thin m-text-spaced m-opacity-mini">With great power,with great responsibility!</p>
+            </div>
+        </div>
+        <div class="ui section divider"></div>
+        <p class="m-text-thin m-text-spaced m-opacity-tiny" style="color: olive">Copyright © 2020 by <a target="_blank" th:href="@{/about}">鄭氏</a></p>
+        <a target="_blank" class="m-text-thin m-text-spaced m-opacity-tiny" href="http://www.beian.miit.gov.cn/">黔ICP备20002689号</a>
+    </div>
+</footer>
+<!--js资源引用片段-->
+<th:block th:fragment="script">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>
+<script src="../static/lib/prism/prism.js" th:src="@{/lib/prism/prism.js}"></script>
+<script src="../static/lib/tocbot/tocbot.min.js" th:src="@{/lib/tocbot/tocbot.min.js}"></script>
+<script src="../static/lib/qrcode/qrcode.min.js" th:src="@{/lib/qrcode/qrcode.min.js}"></script>
+<script src="../static/lib/waypoints/jquery.waypoints.min.js" th:src="@{/lib/waypoints/jquery.waypoints.min.js}"></script>
+<script>
+    $('#newblog-container').load(/*[[@{/footer/newblog}]]*/"/footer/newblog");
+    function showTime() {
+        var t = new Date();//获取当前时间
+        var year = t.getFullYear();//获取当前时间的年份
+        var month = t.getMonth()+1;//获取当前时间的月份
+        var day = t.getDate();//获取当前时间的日
+        var week = t.getDay();//获取当前时间的日期
+        var arr = new Array("星期日","星期一","星期二","星期三","星期四","星期五","星期六");//规范星期的输出
+        var hour = t.getHours();//获取当时间的小时
+        var minute = t.getMinutes();//获取当前时间的分
+        var second = t.getSeconds();//获取当前时间的秒
+        var showTime = year+"/"+month+"/"+day+" "+arr[week]+
+            " "+hour+((minute<10)?":0":":")+minute+((second<10)?":0":":")
+            +second+((hour>12)?".pm":".am");//规范整体时间输出
+        document.getElementById("clock").innerText=showTime;
+    }
+    setInterval('showTime()',1000);
+
+    function show_date_time(){
+        window.setTimeout("show_date_time()", 1000);
+        var BirthDay=new Date("4/1/2020 00:00:00");
+        var today=new Date();
+        var timeold=(today.getTime() - BirthDay.getTime());
+        var sectimeold=timeold/1000
+        var secondsold=Math.floor(sectimeold);
+        var msPerDay=24*60*60*1000
+        var e_daysold=timeold/msPerDay
+        var daysold=Math.floor(e_daysold);
+        var e_hrsold=(e_daysold-daysold)*24;
+        var hrsold=Math.floor(e_hrsold);
+        var e_minsold=(e_hrsold-hrsold)*60;
+        var minsold=Math.floor((e_hrsold-hrsold)*60);
+        var seconds=Math.floor((e_minsold-minsold)*60);
+        times.innerHTML="<span>"+daysold+ "天"+hrsold+"小时"+minsold+"分"+seconds+"秒"+"</span>" ;
+    }
+    show_date_time();
+</script>
+</th:block>
+</body>
+</html>
