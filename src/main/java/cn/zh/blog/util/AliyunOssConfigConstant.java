@@ -10,19 +10,19 @@ public class AliyunOssConfigConstant {
     /**
      * 仓库名称
      */
-    public static final String BUCKE_NAME = "blog-zh";
+    public static final String BUCKE_NAME = "**";
     /**
      * 地域节点
      */
-    public static final String END_POINT = "oss-cn-zhangjiakou.aliyuncs.com";
+    public static final String END_POINT = "**";
     /**
      * 你的AccessKey ID
      */
-    public static final String ACCESSKRY_ID = "LTAI4FnZSAHrZJuUPTzvNk1U";
+    public static final String ACCESSKRY_ID = "**";
     /**
      * 你的Access Key Secret
      */
-    public static final String ACCESSKEY_SECRET = "1RNyE271C9QWvDZ7pAgzK6CTZZqa80";
+    public static final String ACCESSKEY_SECRET = "**";
     /**
      * 仓库中的文件夹
      */
