@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <title>404</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <link rel="stylesheet" href="../static/css/me.css">
     <style class="cp-pen-styles">
         .me404 {
             width: 1000px;
@@ -1536,6 +1538,26 @@
     </style>
 </head>
 <body>
+<!--导航-->
+<nav th:replace="_fragments :: menu(7)" class="ui  inverted attached segment m-padded-tb-mini m-shadow-small">
+    <div class="ui container">
+        <div class="ui inverted secondary stackable menu">
+            <h2 class="ui blue header item">鄭氏博客</h2>
+            <a href="#" class="m-item item m-mobile-hide"><i class="ui red  home icon"></i>我的首页</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="green sitemap icon"></i>博文分类</a>
+            <a href="#" class="active m-item item m-mobile-hide"><i class="purple tags icon"></i>博文标签</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="teal clone icon"></i>博文归档</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="brown info circle icon"></i>与吾有关</a>
+            <div class="m-item right item m-mobile-hide">
+                <div class="ui icon inverted transparent input">
+                    <input type="text" placeholder="请输入想要搜索的......">
+                    <i class="teal searchengin link icon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="" class="ui menu toggle black icon button m-right-top m-mobile-show"> <i class="sidebar icon"></i></a>
+</nav>
 <svg class="me404" viewBox="0 0 1000 480">
     <path id="cloud" class="st0" d="M658.4,345.2c-10.9,0-19.7-8.8-19.7-19.7c0-10.9,8.8-19.7,19.7-19.7h50.1c9.9-1.5,17.5-10,17.5-20.3
     c0-11.4-9.2-20.6-20.6-20.6v-0.2H633c-11.4,0-20.6-6.7-20.6-18.1c0-11.4,9.2-19.3,20.6-19.3h70.4l2-0.2c7.3-3.1,12.5-11,12.5-19.5

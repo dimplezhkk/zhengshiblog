@@ -7,7 +7,6 @@ import cn.zh.blog.service.TypeService;
 import cn.zh.blog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,6 +56,10 @@ public class LoginController {
         if (user != null) {
             user.setPassword(null);
             session.setAttribute("user",user);
+            session.setAttribute("countUser",userService.countUser());
+            session.setAttribute("countBlog",blogService.countBlog());
+            session.setAttribute("countTag",tagService.countTag());
+            session.setAttribute("countType",typeService.countType());
             return "admin/index";
         } else {
             attributes.addFlashAttribute("message","用户名或密码错误 -_-!!!");
@@ -67,14 +70,14 @@ public class LoginController {
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.removeAttribute("user");
+        session.removeAttribute("countUser");
+        session.removeAttribute("countBlog");
+        session.removeAttribute("countTag");
+        session.removeAttribute("countType");
         return "redirect:/admin";
     }
-    @GetMapping("index")
-    public String index(Model model){
-        model.addAttribute("countUser",userService.countUser());
-        model.addAttribute("countBlog",blogService.countBlog());
-        model.addAttribute("countTag",tagService.countTag());
-        model.addAttribute("countType",typeService.countType());
+    @GetMapping("/index")
+    public String index(){
         return "admin/index";
     }
 }

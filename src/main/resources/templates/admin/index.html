@@ -54,25 +54,25 @@
                 <div class="column">
                     <div class="ui raised segment">
                         <a class="ui red ribbon label"><i class="teal bookmark icon"></i>博客文章</a>
-                        <p class="ui right teal button" th:text="${countBlog}">999</p>
+                        <p class="ui right teal button" th:text="${session.countBlog}">999</p>
                     </div>
                 </div>
                 <div class="column">
                     <div class="ui raised segment">
                         <a class="ui pink ribbon label"><i class="green sitemap icon"></i>博文分类</a>
-                        <p class="ui right green ribbon button" th:text="${countType}">999</p>
+                        <p class="ui right green ribbon button" th:text="${session.countType}">999</p>
                     </div>
                 </div>
                 <div class="column">
                     <div class="ui raised segment">
                         <a class="ui yellow ribbon label"><i class="purple tags icon"></i>博文标签</a>
-                        <p class="ui right purple ribbon button" th:text="${countTag}">888</p>
+                        <p class="ui right purple ribbon button" th:text="${session.countTag}">888</p>
                     </div>
                 </div>
                 <div class="column">
                     <div class="ui raised segment">
                         <a class="ui purple ribbon label"><i class="black users icon"></i>系统用户</a>
-                        <p class="ui right black ribbon button" th:text="${countUser}">888</p>
+                        <p class="ui right black ribbon button" th:text="${session.countUser}">888</p>
                     </div>
                 </div>
             </div>

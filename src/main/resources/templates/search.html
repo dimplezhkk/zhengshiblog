@@ -81,21 +81,21 @@
 
         </div>
         <!--底部footer-->
-        <!--/*-->
+        <!--分页-->
         <div class="ui bottom attached segment" th:if="${page.totalPages} > 1">
             <div class="ui middle aligned one column grid">
                 <div class="column">
                     <!--首页-->
-                    <a th:href="@{/(page=0)}" th:if="${page.number!=0}" class="item" th:unless="${page.first}">
+                    <a th:href="@{/search/(page=0,query=${query})}" th:if="${page.number!=0}" class="item" th:unless="${page.first}">
                         <i class="blue arrow left icon"></i>
                     </a>
                     <!--上一页-->
-                    <a th:href="@{/(page=${page.number}-1)}"  class="item" th:unless="${page.first}">
+                    <a th:href="@{/search/(page=${page.number}-1,query=${query})}"  class="item" th:unless="${page.first}">
                         <i class="blue chevron left icon"></i>
                     </a>
                     <!--判断当前页-->
                     <th:block th:each="i : ${#numbers.sequence(1,page.totalPages)}">
-                        <a th:href="@{/(page=${i}-1)}" th:if="${(page.number+1) != i}"
+                        <a th:href="@{/search/(page=${i}-1,query=${query})}" th:if="${(page.number+1) != i}"
                            th:text="${i}" th:classappend="${page.number+1 == i} ? 'active blue' : ''"
                            class="ui button mini">3
                         </a>
@@ -105,18 +105,18 @@
                         </a>
                     </th:block>
                     <!--下一页-->
-                    <a th:href="@{/(page=${page.number}+1)}"  class="item" th:unless="${page.last}">
+                    <a th:href="@{/search/(page=${page.number}+1,query=${query})}"  class="item" th:unless="${page.last}">
                         <i class="blue chevron right icon"></i>
                     </a>
                     <!--尾页-->
-                    <a th:href="@{/(page=${page.totalPages}-1)}" th:attr="data-page=${page.totalPages}-1"
+                    <a th:href="@{/search/(page=${page.totalPages}-1,query=${query})}" th:attr="data-page=${page.totalPages}-1"
                        class="item" th:unless="${page.last}">
                         <i class="blue arrow right icon"></i>
                     </a>
                 </div>
             </div>
         </div>
-        <!--*/-->
+    </div>
     </div>
     </div>
     <!--底部footer-->
@@ -172,8 +172,12 @@
             <p class="m-text-thin m-text-spaced m-opacity-tiny" style="color: olive">Copyright © 2020 by 鄭氏</p>
         </div>
     </footer>
+
+<!--/*/<th:block th:replace="admin/_fragments :: script">/*/-->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+<!--/*/</th:block>/*/-->
+
 <script>
     $('.menu.toggle').click(function () {
         $('.m-item').toggleClass('m-mobile-hide');

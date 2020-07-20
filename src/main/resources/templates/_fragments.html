@@ -18,7 +18,7 @@
 
 <!--前台导航引用片段-->
 <nav th:fragment="menu(n)" class="ui  attached segment m-padded-tb-mini m-shadow-small">
-    <div style="float: left;padding-top: 5px"><img th:src="@{/images/logo.png}" style="width: 100px;height: 45px"></div>
+    <div style="float: left;padding-top: 5px"><a th:href="@{/}"><img th:src="@{/images/logo.png}" style="width: 100px;height: 45px"></a></div>
     <div class="ui container">
         <div class="ui  secondary stackable menu">
             <h2 class="ui blue header item">鄭氏博客</h2>
@@ -29,7 +29,7 @@
             <a href="#" th:href="@{/archives}" class="m-item item m-mobile-hide" th:classappend="${n==4} ? 'active'"><i class="teal clone icon"></i>博文归档</a>
             <a href="#" th:href="@{/about}" class="m-item item m-mobile-hide" th:classappend="${n==5} ? 'active'"><i class="brown info circle icon"></i>与吾有关</a>
             <div class="m-item right item m-mobile-hide">
-                <form name="search" action="#" method="post" th:action="@{/search}" target="_blank">
+                <form name="search" action="#" method="get" th:action="@{/search}" target="_blank">
                 <div class="ui icon transparent input">
                     <input type="text" name="query" placeholder="请输入想要搜索的......" th:value="${query}">
                     <i onclick="document.forms['search'].submit()" class="teal searchengin link icon"></i>
@@ -38,7 +38,7 @@
             </div>
         </div>
     </div>
-    <a href="" class="ui menu toggle black icon button m-right-top m-mobile-show"> <i class="sidebar icon"></i></a>
+    <!--<a href="" class="ui menu toggle black icon button m-right-top m-mobile-show"> <i class="sidebar icon"></i></a>-->
 </nav>
 
 
